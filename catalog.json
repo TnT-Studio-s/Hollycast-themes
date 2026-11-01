@@ -1,4 +1,17 @@
 {
   "formatVersion": 1,
-  "themes": []
+  "themes": [
+    {
+      "id": "christmas-morning",
+      "name": "Christmas Morning",
+      "creator": "Hollycast contributors",
+      "description": "A nostalgic Christmas room with ivory serif type, a cover list, cranberry and gold controls, and a CRT preview. Requires Hollycast with list badges and keyboard preview support; see README.",
+      "version": "1.0.0",
+      "package": "packages/christmas-morning-1.0.0.zip",
+      "screenshots": [
+        "screenshots/christmas-morning/library.png",
+        "screenshots/christmas-morning/portrait.png"
+      ]
+    }
+  ]
 }
