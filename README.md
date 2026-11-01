@@ -38,6 +38,7 @@ locally in Hollycast to validate its layouts, fonts and asset references.
 The catalogue starts empty until a theme is contributed. The application does
 not need Git, GitHub authentication or a separate installer to use this repo.
 Theme authors retain their copyrights; each theme must include its own licence.
+The catalogue builder is licensed under GPL-2.0-or-later; see `LICENSE`.
 
 ## Maintainers
 

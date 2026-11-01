@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright 2026 The Hollycast Authors
+# SPDX-License-Identifier: GPL-2.0-or-later
 """Build deterministic Hollycast catalogue packages using only Python's stdlib."""
 import argparse
 import io
@@ -65,6 +67,7 @@ def build(root, verify=False):
                 info.external_attr = 0o100644 << 16
                 package.writestr(info, file.read_bytes())
         package_path = f"packages/{theme_id}-{version}.zip"
+        check(buffer.tell() <= 64 * 1024 * 1024, f"Theme ZIP exceeds 64 MiB: {theme_id}")
         outputs[package_path] = buffer.getvalue()
         entries.append({"id": theme_id, "name": text(manifest["name"], "name", 160),
                         "creator": text(manifest["author"], "author", 160),
