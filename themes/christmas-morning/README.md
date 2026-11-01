@@ -23,9 +23,9 @@ or plugin.
 macOS arm64 build `ci-dev-41243457232-18-g01330d784` plus the shared list parser
 and keyboard-preview changes described in [COMPATIBILITY.md](COMPATIBILITY.md).
 The base version alone is insufficient. Older builds reject the optional `list`
-field. No compatible published release is asserted; publish this listing only
-when the renderer update is available to catalogue users. The catalogue does
-not currently enforce a minimum app version.
+field. Use a build containing that renderer update; the catalogue does not
+currently enforce a minimum app version. No compatibility with an older
+published release is asserted.
 
 ## Use
 

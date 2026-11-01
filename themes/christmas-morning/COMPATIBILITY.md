@@ -25,5 +25,7 @@ reject the `list` field. There is no claim of compatibility with an older
 release and no minimum-app-version field in the current catalogue. The listing
 description repeats this dependency so it is visible before download.
 
-Release this catalogue entry after the required app support is available to
-users. Until then, the contribution is prepared for review and local testing.
+Use a Hollycast build containing the renderer support above. The theme browser
+development branch includes that support so the downloaded package can be
+installed and used there. The catalogue does not make older releases compatible
+or automatically enforce this requirement.

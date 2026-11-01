@@ -35,8 +35,10 @@ files, eight nested folders and 64 MiB unpacked. Symlinks are not supported.
 The publishing script checks paths and package limits. Also install the theme
 locally in Hollycast to validate its layouts, fonts and asset references.
 
-The catalogue starts empty until a theme is contributed. The application does
-not need Git, GitHub authentication or a separate installer to use this repo.
+The catalogue includes **Christmas Morning**, with wide and portrait layouts.
+Use a Hollycast build with the list presentation and keyboard preview support
+described in the theme's compatibility notes. The application does not need
+Git, GitHub authentication or a separate installer to use this repo.
 Theme authors retain their copyrights; each theme must include its own licence.
 The catalogue builder is licensed under GPL-2.0-or-later; see `LICENSE`.
 
