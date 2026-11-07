@@ -1,3 +1,4 @@
+<!-- Portions Copyright 2026 The Hollycast Authors -->
 # Hollycast themes
 
 Community theme catalogue for Hollycast, maintained by TnT Studio's.
@@ -35,7 +36,9 @@ files, eight nested folders and 64 MiB unpacked. Symlinks are not supported.
 The publishing script checks paths and package limits. Also install the theme
 locally in Hollycast to validate its layouts, fonts and asset references.
 
-The catalogue includes **Christmas Morning**, with wide and portrait layouts.
+The catalogue includes **Christmas Morning**, with wide and portrait layouts,
+and **Harvest Afterglow**, a Thanksgiving lodge with full-width gallery and list
+layouts, fitted descriptions and a dedicated portrait view.
 Use a Hollycast build with the list presentation and keyboard preview support
 described in the theme's compatibility notes. The application does not need
 Git, GitHub authentication or a separate installer to use this repo.

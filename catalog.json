@@ -12,6 +12,17 @@
         "screenshots/christmas-morning/library.png",
         "screenshots/christmas-morning/portrait.png"
       ]
+    },
+    {
+      "id": "harvest-afterglow",
+      "name": "Harvest Afterglow",
+      "creator": "The Hollycast Authors",
+      "description": "A candlelit Thanksgiving lodge with painted maple leaves, a harvest feast, cranberry and brass controls, storybook typography, a full-width cover gallery, a tall fireside list, fitted game descriptions, and a dedicated portrait layout.",
+      "version": "1.0.0",
+      "package": "packages/harvest-afterglow-1.0.0.zip",
+      "screenshots": [
+        "screenshots/harvest-afterglow/list.jpg"
+      ]
     }
   ]
 }

@@ -1,0 +1,126 @@
+<!-- Portions Copyright 2026 The Hollycast Authors -->
+<!-- SPDX-License-Identifier: GPL-2.0-or-later -->
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harvest Afterglow — design preview</title>
+<style>
+@font-face{font-family:Harvest;src:url('harvest-afterglow/assets/Alegreya-Regular.ttf')}
+@font-face{font-family:Harvest;src:url('harvest-afterglow/assets/Alegreya-Bold.ttf');font-weight:700}
+*{box-sizing:border-box}body{margin:0;background:#160f0c;color:#fff1d7;font:16px system-ui,sans-serif}
+header{max-width:1460px;margin:auto;padding:24px 24px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+h1{font:700 28px Harvest,Georgia,serif;margin:0 0 5px}p{margin:0;color:#d8bea0;font-size:12px;line-height:1.6}
+nav{display:flex;gap:8px;flex-wrap:wrap}nav button{background:#352219;color:#fff1d7;border:1px solid #9d6d40;padding:10px 14px;border-radius:6px;cursor:pointer}
+nav button[aria-pressed=true]{background:#782e40;border-color:#e6bd72}button:focus-visible{outline:2px solid #e6bd72;outline-offset:2px}
+#shell{width:100%;margin:0 0 20px;box-shadow:0 18px 70px #0009;overflow:hidden}
+#toolbar{height:50px;background:#21150f;display:flex;align-items:center;gap:18px;padding:0 22px;font:18px Harvest,Georgia,serif;white-space:nowrap;overflow-x:auto}
+#toolbar strong{color:#e6bd72;margin-right:9px}#toolbar span{padding:5px 10px}#toolbar .active{background:#782e40;border-radius:4px}
+#canvas{position:relative;overflow:hidden;font-family:Harvest,Georgia,serif;isolation:isolate}
+.el{position:absolute;overflow:hidden;margin:0;line-height:1.15}.el img{width:100%;height:100%;display:block}.label{white-space:nowrap;text-overflow:ellipsis}
+.control{font-family:inherit;display:flex;align-items:center;justify-content:center;padding:0 5px;gap:5px;border:1px solid;cursor:pointer;line-height:1.05}
+.control:hover{filter:brightness(1.14)}#games{position:absolute;display:grid;overflow:hidden;z-index:0;padding:2px}
+.game{min-width:0;min-height:0;border:1px solid transparent;background:transparent;color:#fff1d7;font-family:inherit;text-align:center;cursor:pointer;border-radius:8px;overflow:hidden;padding:7px}
+.game.selected{background:#782e40ec;border-color:#e6bd72}.game img{object-fit:contain;display:block;margin:auto}.game .name{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px}
+.game.list-row{display:flex;align-items:center;gap:12px;text-align:left;border-bottom:1px solid #b7824c40;border-radius:5px}.list-row img{margin:0;flex:none}.list-row .name{flex:1;margin:0}.badge{font:inherit;font-size:.64em;color:#21150f;background:#e6bd72;border-radius:4px;padding:4px 6px;white-space:nowrap}
+#footnote{max-width:1400px;margin:0 auto 30px;padding:0 24px;font-size:12px;line-height:1.7;color:#bba48b}
+@media(max-width:760px){header{display:block;padding:16px}nav{margin-top:16px}h1{font-size:25px}nav button{font-size:12px;padding:8px 10px}}
+</style>
+<header>
+<div><h1>Harvest Afterglow</h1><p>Design preview · sample library content · not a Hollycast screenshot</p></div>
+<nav aria-label="Layout preview"></nav>
+</header>
+<div id="shell"><div id="scaled"><div id="toolbar"><strong>HOLLYCAST</strong><span class="active">All Games</span><span>Continue Playing</span><span>Favourites</span><span>Filter</span></div><main id="canvas" aria-label="Theme design preview"></main></div></div>
+<p id="footnote">The scene, palette, bundled fonts, artwork placement and control rectangles come from the actual theme manifest. Native scrolling, game artwork, controller focus, animation timing and app rendering require an in-app check. Click a sample title to inspect the composition. Play is a preview control only.</p>
+<script>
+/* THEME_DATA */
+const asset = p => 'harvest-afterglow/' + p;
+const samples = ['Maple Drift', 'Cider Circuit', 'Amber Skies', 'Acorn Rally', 'Copper Trails', 'Moonlit Grove', 'Harvest Sprint', 'Orchard Odyssey'];
+let layoutIndex = 0, selected = 0, favourite = true, previewSource = 'screenshot';
+const canvas = document.querySelector('#canvas');
+function render() {
+  const width = document.documentElement.clientWidth;
+  const height = Math.max(320, innerHeight - document.querySelector('header').offsetHeight - 50);
+  const requested = theme.layouts[layoutIndex];
+  const layout = requested.narrowLayout && width / height < requested.narrowAspect
+    ? theme.layouts.find(candidate => candidate.id === requested.narrowLayout)
+    : requested;
+  const portrait = layout.id === 'pocket-harvest';
+  document.querySelector('#toolbar').style.fontSize = portrait ? '15px' : '18px';
+  document.querySelector('#toolbar').style.gap = portrait ? '4px' : '18px';
+  document.querySelector('#scaled').style.width = width + 'px';
+  canvas.style.width = width + 'px'; canvas.style.height = height + 'px'; canvas.replaceChildren();
+  const place = (node, rect) => {
+    Object.assign(node.style, {left:rect[0]*width+'px', top:rect[1]*height+'px', width:rect[2]*width+'px', height:rect[3]*height+'px'});
+    return node;
+  };
+  for (const e of layout.elements) {
+    if (e.when || e.sweepSeconds) continue;
+    const node = place(document.createElement(e.type === 'button' ? 'button' : 'div'), e.rect);
+    node.className = 'el'; node.style.zIndex = e.zIndex ?? 0;
+    node.style.color = '#' + (e.color || 'fff1d7');
+    node.style.fontSize = Math.max(10, (e.fontSize || .035)*height) + 'px';
+    node.style.fontWeight = e.bold ? 700 : 400; node.style.textAlign = e.align || 'left';
+    node.style.borderRadius = (e.rounding || 0) + 'px';
+    if (e.type === 'panel') {
+      node.style.background = e.endColor ? 'linear-gradient(#'+e.color+',#'+e.endColor+')' : '#'+e.color;
+    } else if (e.type === 'image' || e.type === 'artwork') {
+      const img = document.createElement('img'); img.alt = '';
+      img.src = asset(e.type === 'image' ? e.source : e.fallbackImage);
+      img.style.objectFit = e.fit === 'stretch' ? 'fill' : (e.fit || 'contain'); node.append(img);
+    } else if (e.type === 'text') {
+      node.textContent = e.text;
+    } else if (e.type === 'metadata') {
+      node.textContent = e.source === 'title' ? samples[selected] : 'Dreamcast  /  Adventure';
+    } else if (e.type === 'details') {
+      node.textContent = 'An evening of discovery, familiar favourites and one more adventure. Sample description for layout preview.';
+    } else if (e.type === 'stat') {
+      node.textContent = ({gameCount:8,page:1,pageCount:1,position:selected+1})[e.source] ?? 0;
+    } else if (e.type === 'button') {
+      const active = e.action === 'favourite' ? favourite : e.action === 'artwork' && e.source === previewSource;
+      node.classList.add('control'); node.style.zIndex = 10;
+      node.style.background = '#' + (active && e.selectedBackground || e.background);
+      node.style.borderColor = '#' + (active && e.selectedBorderColor || e.borderColor || 'b7824c');
+      node.style.color = '#' + (active && e.selectedColor || e.color);
+      node.style.borderRadius = Math.min(e.rect[2]*width,e.rect[3]*height)*(e.rounding||0)+'px';
+      node.textContent = (e.icon ? (active ? '★ ' : '☆ ') : '') + (active && e.selectedText || e.text);
+      node.onclick = () => {
+        if (e.action === 'favourite') favourite = !favourite;
+        else if (e.action === 'artwork') previewSource = e.source;
+        else if (e.action === 'next') selected = (selected+1)%samples.length;
+        else if (e.action === 'previous') selected = (selected+samples.length-1)%samples.length;
+        render();
+      };
+    }
+    if (e.wrap === false) node.classList.add('label');
+    canvas.append(node);
+  }
+  const games = place(document.createElement('div'),layout.browser); games.id = 'games';
+  const grid = layout.mode === 'grid';
+  games.style.gap = grid ? layout.spacing+'px' : '0';
+  games.style.gridTemplateColumns = grid ? 'repeat('+layout.columns+',minmax(0,1fr))' : '1fr';
+  games.style.gridTemplateRows = grid ? 'repeat(2,minmax(0,1fr))' : 'repeat(8,'+(layout.rowHeight*height)+'px)';
+  samples.forEach((name,index) => {
+    const tile = document.createElement('button'); tile.className = 'game' + (grid ? '' : ' list-row') + (index===selected ? ' selected' : '');
+    tile.style.fontSize = Math.max(10,layout.fontSize*height)+'px';
+    const img = document.createElement('img'); img.src = asset(layout.placeholder); img.alt='';
+    const size = grid ? Math.min((layout.browser[2]*width-30)/4-16,layout.browser[3]*height/2-45) : layout.rowHeight*height-14;
+    img.style.width = size+'px'; img.style.height = size+'px';
+    const label = document.createElement('span'); label.className='name'; label.textContent=name; tile.append(img,label);
+    if(!grid && index===selected && favourite) {const badge=document.createElement('span');badge.className='badge';badge.textContent='★ Favourite';tile.append(badge);}
+    tile.onclick = () => {selected=index;render();}; games.append(tile);
+  });
+  canvas.append(games);
+  document.querySelectorAll('nav button').forEach((button, index) => {
+    button.setAttribute('aria-pressed', String(index === layoutIndex));
+  });
+}
+theme.layouts.forEach((layout, index) => {
+  const button = document.createElement('button');
+  button.textContent = layout.name;
+  button.onclick = () => { layoutIndex = index; render(); };
+  document.querySelector('nav').append(button);
+});
+addEventListener('resize',render); render();
+</script>
+</html>
