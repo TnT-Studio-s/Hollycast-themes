@@ -2,7 +2,7 @@
 # Hollycast themes
 
 Community theme catalogue for Hollycast, maintained by TnT Studio's.
-In Hollycast, open **Settings → Library → Browse themes** to see screenshots,
+In Hollycast, open **Settings â†’ Library â†’ Browse themes** to see screenshots,
 read about each creator, and download and install a theme. Installed themes are
 marked automatically. Choose **Use theme** to apply one.
 
@@ -55,3 +55,9 @@ The validation workflow checks that generated files match the source themes.
 
 Hollycast deliberately never overwrites an installed theme. Users keep their
 existing package when a newer version appears in this catalogue.
+
+**Signal Bloom** adds a neon cover carousel and selected-game backgrounds.
+**Play Archive** adds an antique reading room with a game index and case preview.
+Both require the renderer support on the Hollycast development branch
+`codex/play-archive-signal-bloom`; older releases cannot load these extensions.
+Restart Hollycast after changing themes to refresh the theme fonts.

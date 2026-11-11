@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright 2026 The Hollycast Authors
+# Portions Copyright 2026 The Hollycast Authors
 # SPDX-License-Identifier: GPL-2.0-or-later
 """Build deterministic Hollycast catalogue packages using only Python's stdlib."""
 import argparse
@@ -48,7 +49,7 @@ def build(root, verify=False):
                   and not image.is_symlink() and 0 < image.stat().st_size <= 8 * 1024 * 1024,
                   f"Missing or oversized screenshot: {screenshot}")
         files, size = [], 0
-        for file in sorted(folder.rglob("*")):
+        for file in sorted(folder.rglob("*"), key=lambda path: path.relative_to(folder).as_posix()):
             check(not file.is_symlink(), f"Symlinks are not supported: {file}")
             if file.is_dir() or file.name == "listing.json":
                 continue
@@ -64,6 +65,7 @@ def build(root, verify=False):
             for file in files:
                 info = zipfile.ZipInfo(file.relative_to(folder).as_posix(), (2026, 1, 1, 0, 0, 0))
                 info.compress_type = zipfile.ZIP_DEFLATED
+                info.create_system = 3
                 info.external_attr = 0o100644 << 16
                 package.writestr(info, file.read_bytes())
         package_path = f"packages/{theme_id}-{version}.zip"

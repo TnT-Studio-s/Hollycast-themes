@@ -23,6 +23,28 @@
       "screenshots": [
         "screenshots/harvest-afterglow/list.jpg"
       ]
+    },
+    {
+      "id": "play-archive",
+      "name": "Play Archive",
+      "creator": "The Hollycast Authors",
+      "description": "An antique reading room with a live game index, parchment pages and scraped case artwork. Requires the new Play Archive-enabled Hollycast development build.",
+      "version": "1.0.0",
+      "package": "packages/play-archive-1.0.0.zip",
+      "screenshots": [
+        "screenshots/play-archive/library.jpg"
+      ]
+    },
+    {
+      "id": "signal-bloom",
+      "name": "Signal Bloom",
+      "creator": "The Hollycast Authors",
+      "description": "A midnight-neon cover carousel with selected-game backgrounds, cyan selection and coral PLAY controls. Requires the new carousel-enabled Hollycast development build.",
+      "version": "1.0.0",
+      "package": "packages/signal-bloom-1.0.0.zip",
+      "screenshots": [
+        "screenshots/signal-bloom/library.jpg"
+      ]
     }
   ]
 }
