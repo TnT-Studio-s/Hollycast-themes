@@ -63,7 +63,7 @@ need Git, a GitHub account or a separate installer.
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <a href="themes/blue-hour"><img src="screenshots/blue-hour/cinema.jpg" alt="Blue Hour theme"></a>
+      <a href="themes/blue-hour"><img src="screenshots/blue-hour/library.jpg" alt="Blue Hour theme"></a>
       <h3><a href="themes/blue-hour">Blue Hour</a></h3>
       A cinematic navy-and-white library with full-screen game artwork,
       an enlarged cover selection, real save previews and a matching DCnet page.
