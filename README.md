@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/TnT-Studio-s/Hollycast-themes/actions/workflows/validate.yml"><img src="https://github.com/TnT-Studio-s/Hollycast-themes/actions/workflows/validate.yml/badge.svg" alt="Validate theme catalogue"></a>
-  <a href="catalog.json"><img src="https://img.shields.io/badge/themes-4-orange" alt="4 themes"></a>
+  <a href="catalog.json"><img src="https://img.shields.io/badge/themes-5-orange" alt="5 themes"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/builder-GPL--2.0--or--later-blue.svg" alt="Builder licence: GPL-2.0-or-later"></a>
   <a href="https://hollycast.org"><img src="https://img.shields.io/badge/web-hollycast.org-orange" alt="hollycast.org"></a>
   <a href="https://discord.gg/8s8Ecc2BxR"><img src="https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white" alt="Discord"></a>
@@ -61,6 +61,15 @@ need Git, a GitHub account or a separate installer.
       background, with cyan selection and coral PLAY controls.
     </td>
   </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="themes/blue-hour"><img src="screenshots/blue-hour/library.jpg" alt="Blue Hour theme"></a>
+      <h3><a href="themes/blue-hour">Blue Hour</a></h3>
+      A cinematic navy-and-white library with full-screen game artwork,
+      an enlarged cover selection, real save previews and a matching DCnet page.
+      Wide and portrait layouts. Requires the cinematic theme renderer build.
+    </td>
+  </tr>
 </table>
 
 Each theme folder has its own README with layouts, controls and rebuild steps.
@@ -99,6 +108,7 @@ release. Older builds reject manifests that contain fields they don't know.
 
 | Theme | Needs |
 | --- | --- |
+| Blue Hour | A build containing [Hollycast PR #69](https://github.com/nexus382/Hollycast/pull/69) (`aeddc1441`) with library actions, save previews, enlarged single-row covers and themed DCnet pages. Older stable and `dev` releases reject its manifest. |
 | Christmas Morning | A build with list badges and keyboard-preview support. See [COMPATIBILITY.md](themes/christmas-morning/COMPATIBILITY.md). |
 | Harvest Afterglow | A current [`dev` build](https://github.com/nexus382/Hollycast/releases/tag/latest-dev) with paged-grid, list-badge and portrait-fallback support. |
 | Play Archive | The [`codex/play-archive-signal-bloom`](https://github.com/nexus382/Hollycast/tree/codex/play-archive-signal-bloom) development branch. |
