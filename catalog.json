@@ -2,6 +2,21 @@
   "formatVersion": 1,
   "themes": [
     {
+      "id": "blue-hour",
+      "name": "Blue Hour",
+      "creator": "The Hollycast Authors",
+      "description": "A cinematic navy-and-white library with full-screen game artwork, enlarged cover selection, Resume / Start Fresh, real save previews, and a matching DCnet page. Requires a build containing Hollycast PR #69 (aeddc1441); older stable and dev builds reject its manifest.",
+      "version": "1.0.0",
+      "package": "packages/blue-hour-1.0.0.zip",
+      "screenshots": [
+        "screenshots/blue-hour/cinema.jpg",
+        "screenshots/blue-hour/portrait.jpg",
+        "screenshots/blue-hour/continue-playing.jpg",
+        "screenshots/blue-hour/dcnet.jpg",
+        "screenshots/blue-hour/dcnet-portrait.jpg"
+      ]
+    },
+    {
       "id": "christmas-morning",
       "name": "Christmas Morning",
       "creator": "Hollycast contributors",
